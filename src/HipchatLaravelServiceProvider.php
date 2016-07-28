@@ -1,6 +1,6 @@
 <?php
 
-namespace Hernandev\HipchatLaravel;
+namespace Qwince\HipchatLaravel;
 
 use Illuminate\Support\ServiceProvider;
 

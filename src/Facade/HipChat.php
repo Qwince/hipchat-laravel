@@ -1,6 +1,6 @@
 <?php
 
-namespace Hernandev\HipchatLaravel\Facade;
+namespace Qwince\HipchatLaravel\Facade;
 
 use Illuminate\Support\Facades\Facade;
 

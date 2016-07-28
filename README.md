@@ -1,23 +1,16 @@
-## hernandev/hipchat-laravel
+## qwince/hipchat-laravel
 
-[![Latest Stable Version](https://poser.pugx.org/hernandev/hipchat-laravel/version.svg)](https://packagist.org/packages/hernandev/hipchat-laravel)
-[![Total Downloads](https://poser.pugx.org/hernandev/hipchat-laravel/downloads.svg)](https://packagist.org/packages/hernandev/hipchat-laravel)
-[![License](https://poser.pugx.org/hernandev/hipchat-laravel/license.svg)](https://packagist.org/packages/hernandev/hipchat-laravel)
-
-
-
-This a [HipChat PHP Client](https://github.com/hipchat/hipchat-php) wrapper for Laravel 4 and 5
-
+This a HipChat PHP Client for Laravel 5
 
 ### Installation
 
-- Include `"hernandev/hipchat-laravel"` inside the `"require"` section of `composer.json` file:
+- Include `"qwince/hipchat-laravel"` inside the `"require"` section of `composer.json` file:
 
     ```php
         ...
         "require": {
             ...,
-            "hernandev/hipchat-laravel": "~2.0"
+            "qwince/hipchat-laravel": "~2.0"
         }
         ...
     
@@ -30,24 +23,24 @@ This a [HipChat PHP Client](https://github.com/hipchat/hipchat-php) wrapper for 
     composer update
     ```
 
-- Insert `'Hernandev\HipchatLaravel\HipchatLaravelServiceProvider',` in your `'providers'` array, inside `app/config/app.php`:
+- Insert `'Qwince\HipchatLaravel\HipchatLaravelServiceProvider',` in your `'providers'` array, inside `app/config/app.php`:
 
     ```php
     ...
     'providers' => [
         ...
-        Hernandev\HipchatLaravel\HipchatLaravelServiceProvider::class,
+        Qwince\HipchatLaravel\HipchatLaravelServiceProvider::class,
     ],
     ```
     
     
-- Insert `'HipChat' => Hernandev\HipchatLaravel\Facade\HipChat:class,` in your `'aliases'` array, inside `app/config/app.php`:
+- Insert `'HipChat' => Qwince\HipchatLaravel\Facade\HipChat:class,` in your `'aliases'` array, inside `app/config/app.php`:
 
     ```php
     ...
     'aliases' => [
         ...
-        'HipChat'         => Hernandev\HipchatLaravel\Facade\HipChat::class,
+        'HipChat'         => Qwince\HipchatLaravel\Facade\HipChat::class,
     ],
     ```
     
@@ -55,7 +48,7 @@ This a [HipChat PHP Client](https://github.com/hipchat/hipchat-php) wrapper for 
 - To Publish the configuration files you will need, run:
 
     ```
-    php artisan vendor:publish --tag=laravel
+    php artisan vendor:publish
     ```
 
 - Edit `app/config/hipchat.php` file updating it your credentials / configurations:

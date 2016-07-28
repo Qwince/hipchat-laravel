@@ -1,12 +1,11 @@
 <?php
 
-namespace Hernandev\HipchatLaravel;
+namespace Qwince\HipchatLaravel;
 
-use Hernandev\HipchatLaravel\Exception\NoApiTokenException;
-use Hernandev\HipchatLaravel\Exception\NoAppNameException;
-use Hernandev\HipchatLaravel\Exception\RoomNotDefinedException;
-use Hernandev\HipchatLaravel\Exception\UserNotDefinedException;
-use HipChat\HipChat as HipChatClient;
+use Qwince\HipchatLaravel\Exception\NoApiTokenException;
+use Qwince\HipchatLaravel\Exception\NoAppNameException;
+use Qwince\HipchatLaravel\Exception\RoomNotDefinedException;
+use Qwince\HipchatLaravel\Exception\UserNotDefinedException;
 
 class HipChat
 {
