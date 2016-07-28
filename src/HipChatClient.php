@@ -4,9 +4,6 @@ namespace Qwince\HipchatLaravel;
 
 class HipChatClient
 {
-
-    const API_SERVER_URL = '';
-
     /**
      * HTTP response codes from API
      *
@@ -21,15 +18,7 @@ class HipChatClient
     const STATUS_NOT_ACCEPTABLE = 406;
     const STATUS_INTERNAL_SERVER_ERROR = 500;
     const STATUS_SERVICE_UNAVAILABLE = 503;
-    /**
-     * Colors for rooms/message
-     */
-    const COLOR_YELLOW = 'yellow';
-    const COLOR_RED = 'red';
-    const COLOR_GRAY = 'gray';
-    const COLOR_GREEN = 'green';
-    const COLOR_PURPLE = 'purple';
-    const COLOR_RANDOM = 'random';
+
     /**
      * Formats for rooms/message
      */
@@ -50,7 +39,7 @@ class HipChatClient
      * @param $api_token
      * @param $api_server
      */
-    function __construct($api_token,$api_server = self::API_SERVER_URL) {
+    function __construct($api_token,$api_server) {
         $this->auth_token = $api_token;
         $this->api_server = $api_server;
         $this->api_version = self::VERSION;
@@ -58,11 +47,18 @@ class HipChatClient
 
 
     /**
+     *
      * Send a message to a room
      *
-     * @see http://api.hipchat.com/docs/api/method/rooms/message
+     * @param $room_id
+     * @param $from
+     * @param $message
+     * @param bool $notify
+     * @param string $color
+     * @param string $message_format
+     * @return mixed|string
      */
-    public function message_room($room_id, $from, $message, $notify = false, $color = self::COLOR_YELLOW, $message_format = self::FORMAT_HTML)
+    public function message_room($room_id, $from, $message, $notify, $color,$message_format)
     {
         $args = array(
             'room_id' => $room_id,
@@ -70,6 +66,7 @@ class HipChatClient
             'message' => $message,
             'notify' => $notify,
             'color' => $color,
+            'message_format' => $message_format
         );
         return $this->make_request('room/'.$room_id.'/notification?auth_token='.$this->auth_token, $args, 'POST');
     }

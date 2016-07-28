@@ -2,6 +2,7 @@
 
 namespace Qwince\HipchatLaravel;
 
+use Qwince\HipchatLaravel\Exception\NoServerUrlException;
 use Qwince\HipchatLaravel\Exception\NoApiTokenException;
 use Qwince\HipchatLaravel\Exception\NoAppNameException;
 use Qwince\HipchatLaravel\Exception\RoomNotDefinedException;
@@ -9,6 +10,17 @@ use Qwince\HipchatLaravel\Exception\UserNotDefinedException;
 
 class HipChat
 {
+    /**
+     * Colors for rooms/message
+     */
+    const COLOR_YELLOW = 'yellow';
+    const COLOR_RED = 'red';
+    const COLOR_GRAY = 'gray';
+    const COLOR_GREEN = 'green';
+    const COLOR_PURPLE = 'purple';
+    const COLOR_RANDOM = 'random';
+
+
     /**
      * @var HipChatClient
      */
@@ -39,6 +51,13 @@ class HipChat
      */
     protected $user = null;
 
+
+    /**
+     * @var string|null
+     */
+    protected $message_format = null;
+
+
     /**
      * HipChat constructor.
      */
@@ -48,12 +67,12 @@ class HipChat
         $this->app_name = config('hipchat.app_name', null);
         $this->room = config('hipchat.default_room', null);
         $this->server = config('hipchat.server', null);
+        $this->message_format = config('hipchat.message_format', null);
 
-        if ($this->server) {
+        if ($this->server)
             $this->hipchat = new HipChatClient($this->api_token, $this->server);
-        } else {
-            $this->hipchat = new HipChatClient($this->api_token);
-        }
+        else
+            throw new NoServerUrlException();
     }
 
     protected function verify()
@@ -94,16 +113,28 @@ class HipChat
         return $this->room;
     }
 
-    public function setUser($user_id)
-    {
-        $this->verify();
-        $this->user = $user_id;
-    }
-
-    public function sendMessage($message, $color = 'gray', $notify = false)
+    public function sendMessage($message, $color = self::COLOR_GREEN, $notify = false)
     {
         $this->checkRoom();
-        $this->hipchat->message_room($this->room, $this->app_name, $message, $notify, $color, 'html');
+        $this->hipchat->message_room($this->room, $this->app_name, $message, $notify, $color, $this-$this->message_format);
+    }
+
+    public function sendInfo($message, $color = self::COLOR_GREEN, $notify = false)
+    {
+        $this->checkRoom();
+        $this->hipchat->message_room($this->room, $this->app_name, $message, $notify, $color, $this->message_format);
+    }
+
+    public function sendWarn($message, $color = self::COLOR_YELLOW, $notify = false)
+    {
+        $this->checkRoom();
+        $this->hipchat->message_room($this->room, $this->app_name, $message, $notify, $color, $this->message_format);
+    }
+
+    public function sendAlert($message, $color = self::COLOR_RED, $notify = false)
+    {
+        $this->checkRoom();
+        $this->hipchat->message_room($this->room, $this->app_name, $message, $notify, $color, $this->message_format);
     }
 
 }

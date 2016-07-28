@@ -10,7 +10,7 @@ This a HipChat PHP Client for Laravel 5
         ...
         "require": {
             ...,
-            "qwince/hipchat-laravel": "~2.0"
+            "qwince/hipchat-laravel": "dev-master"
         }
         ...
     
@@ -48,29 +48,29 @@ This a HipChat PHP Client for Laravel 5
 - To Publish the configuration files you will need, run:
 
     ```
-    php artisan vendor:publish
+    php artisan vendor:publish --provider="Qwince\HipchatLaravel\HipchatLaravelServiceProvider"
     ```
 
 - Edit `app/config/hipchat.php` file updating it your credentials / configurations:
 
     ```php
+    'server' => 'insert_your_url',
     'api_token' => 'insert_your_api_token',
     'app_name' => 'Your App Name',
-    'default_room' => null, // this is optional
+    'default_room' => 1234,
     
     ```
     
-    
-
 
 ### Usage
 
-**Note**: when 'default_room' is set on config file, there is not need to call ::setRoom('room_name'), use it only if want to work with a room that is not the default one.
 
 - Notify in a Room
 
     ```php
-    HipChat::setRoom('RoomName');
+    
+    HipChat::setRoom('RoomID'); // or set default in config file 
+    
     HipChat::sendMessage('My Message');
     
     // you have two optional parameters, `color` and `notify`
@@ -81,97 +81,4 @@ This a HipChat PHP Client for Laravel 5
     
     
     ```
-    
-- Get a Room Details
-
-    ```php
-    HipChat::setRoom('RoomName');
-    HipChat::getRoom(); // StdObject
-    ```
-    
-- Verify is a room exists
-
-    ```php
-    HipChat::setRoom('RoomName');
-    HipChat::roomExists(); // boolean
-    ```
-    
-    
-- Get Rooms List
-
-    ```php
-    HipChat::getRooms(); // json
-    ```
-    
-    
-- Retrieve Message History for a Room
-
-    ```php
-    HipChat::setRoom('RoomName');
-    return HipChat::getRoomsHistory(); // json
-    ```
-    
-    
-- Change Room Topic
-
-    ```php
-    HipChat::setRoom('RoomName');
-    return HipChat::setRoomTopic('New Topic via API'); // boolean
-    ```
-    
-    
-- Get a List of Users
-
-    ```php
-    HipChat::getUsers(); // json
-    ```
-    
-- Get an User details
-
-    ```php
-    HipChat::setUser('me@me.com'); // you can use id, email or @mention_name
-    HipChat::getUser(); // StdObject
-    ```
-    
-- Create an Room
-
-    ```php
-    HipChat::setUser('me@me.com'); // you can use id, email or @mention_name
-    // see optional fields on code
-    HipChat::createRoom('New Room Name'); // boolean
-    ```
-    
-- Get a List of Users
-
-    ```php
-    HipChat::getUsers(); // json
-    ```
-    
-
-- Delete a room
-
-    ```php
-    HipChat::setRoom('RoomName');
-    HipChat::deleteRoom(); // boolean
-    ```
-
-- Create User
-
-    ```php
-    // email, first_name last_name, mention_name, title
-    HipChat::createUser('me2@me2.com', 'First Last', 'mention', 'title'); // boolean
-    ```
-    
-- Update User Info
-
-    ```php 
-     // you can use email, mention name or user_id
-    HipChat::setUser('me@me.com');
-    
-    // same signature as create_user method, pass null the fields you dont want to update
-    HipChat::updateUser(null, 'NewFirst New Last'); // boolean
-    
-    ```
-
-
     
