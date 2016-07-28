@@ -9,7 +9,7 @@ return array(
     | For Self Hosted Servers, Leave null for default cloud account.
     |
     */
-    'server' => null, // this is optional
+    'server' => 'insert_your_url', // this is required
 
     /*
     |--------------------------------------------------------------------------
