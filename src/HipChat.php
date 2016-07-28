@@ -116,7 +116,7 @@ class HipChat
     public function sendMessage($message, $color = self::COLOR_GREEN, $notify = false)
     {
         $this->checkRoom();
-        $this->hipchat->message_room($this->room, $this->app_name, $message, $notify, $color, $this-$this->message_format);
+        $this->hipchat->message_room($this->room, $this->app_name, $message, $notify, $color, $this->message_format);
     }
 
     public function sendInfo($message, $color = self::COLOR_GREEN, $notify = false)
